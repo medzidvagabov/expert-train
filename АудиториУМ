@@ -1,0 +1,741 @@
+/* ============================================
+   АудиториУМ — Полный CSS
+   ============================================ */
+
+/* ---------- CSS-переменные ---------- */
+:root {
+  --grad: linear-gradient(135deg, #2563EB, #7C3AED);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
+  --bg-color: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border-color: #E2E8F0;
+}
+
+/* ---------- Сброс / Базовые ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #CBD5E1 transparent;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ---------- Градиентные утилиты ---------- */
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.grad-bg {
+  background: var(--grad);
+}
+
+.grad-border {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.grad-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--grad);
+  z-index: -1;
+}
+
+/* ---------- Карточки ---------- */
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* ---------- Кнопки ---------- */
+.btn-grad {
+  background: var(--grad);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 15px;
+}
+
+.btn-grad:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+}
+
+.btn-outline {
+  border: 2px solid #2563EB;
+  color: #2563EB;
+  background: transparent;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 15px;
+}
+
+.btn-outline:hover {
+  background: #2563EB;
+  color: #fff;
+}
+
+/* ---------- Сайдбар ---------- */
+.sidebar {
+  width: 280px;
+  min-height: 100vh;
+  background: #fff;
+  border-right: 1px solid #E2E8F0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 40;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 35;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.sidebar-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------- Навигация ---------- */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 20px;
+  margin: 2px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #64748B;
+  font-weight: 500;
+  font-size: 14.5px;
+}
+
+.nav-item:hover {
+  background: #F1F5F9;
+  color: #1E293B;
+}
+
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.nav-item.active i {
+  color: #2563EB;
+}
+
+/* ---------- Основной контент ---------- */
+.main-content {
+  margin-left: 280px;
+  min-height: 100vh;
+  transition: margin 0.3s;
+}
+
+.main-content.full {
+  margin-left: 0;
+}
+
+/* ---------- Поля ввода ---------- */
+.input-field {
+  width: 100%;
+  padding: 11px 16px;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14.5px;
+  transition: all 0.2s;
+  outline: none;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* ---------- Таблицы ---------- */
+.table-row {
+  transition: background 0.15s;
+}
+
+.table-row:hover {
+  background: #F8FAFC;
+}
+
+/* ---------- Тосты ---------- */
+.toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14.5px;
+  z-index: 9999;
+  animation: slideIn 0.4s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100% - 48px);
+}
+
+.toast.success {
+  background: #059669;
+}
+
+.toast.error {
+  background: #DC2626;
+}
+
+.toast.info {
+  background: #2563EB;
+}
+
+/* ---------- Анимации ---------- */
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-grad {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Классы анимации ---------- */
+.fade-up {
+  animation: fadeUp 0.6s ease both;
+}
+
+.fade-up-d1 {
+  animation-delay: 0.1s;
+}
+
+.fade-up-d2 {
+  animation-delay: 0.2s;
+}
+
+.fade-up-d3 {
+  animation-delay: 0.3s;
+}
+
+.fade-up-d4 {
+  animation-delay: 0.4s;
+}
+
+/* ---------- Тепловая карта ---------- */
+.heatmap-cell {
+  width: 100%;
+  aspect-ratio: 1.4;
+  border-radius: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.08);
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Ячейки расписания ---------- */
+.schedule-cell {
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  min-height: 60px;
+}
+
+.schedule-cell:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-cell.conflict {
+  border-color: #DC2626 !important;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+.schedule-cell.type-lecture {
+  background: #EFF6FF;
+  border-left: 4px solid #2563EB;
+}
+
+.schedule-cell.type-practice {
+  background: #F0FDF4;
+  border-left: 4px solid #16A34A;
+}
+
+.schedule-cell.type-lab {
+  background: #FFFBEB;
+  border-left: 4px solid #D97706;
+}
+
+.schedule-cell[draggable="true"] {
+  cursor: grab;
+}
+
+.schedule-cell[draggable="true"]:active {
+  cursor: grabbing;
+  opacity: 0.7;
+}
+
+/* ---------- Тултипы ---------- */
+.tooltip-custom {
+  position: absolute;
+  background: #1E293B;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 100;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Модальные окна ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s;
+  padding: 16px;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 540px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* ---------- Прогресс-кольцо ---------- */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+/* ---------- Зона перетаскивания файлов ---------- */
+.drop-zone {
+  border: 2px dashed #CBD5E1;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+  border-color: #2563EB;
+  background: rgba(37, 99, 235, 0.04);
+}
+
+/* ---------- Слайдер ---------- */
+.slider-custom {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #E2E8F0;
+  outline: none;
+}
+
+.slider-custom::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--grad);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* ---------- Табы ---------- */
+.tab-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  background: transparent;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+.tab-btn.active {
+  background: var(--grad);
+  color: #fff;
+}
+
+.tab-btn:hover:not(.active) {
+  background: #F1F5F9;
+  color: #1E293B;
+}
+
+/* ---------- Бейджи статусов ---------- */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-green {
+  background: #DCFCE7;
+  color: #166534;
+}
+
+.status-orange {
+  background: #FFF7ED;
+  color: #9A3412;
+}
+
+.status-red {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+/* ---------- Герой-секция ---------- */
+.hero-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.04) 0%,
+    rgba(124, 58, 237, 0.04) 50%,
+    rgba(37, 99, 235, 0.02) 100%
+  );
+}
+
+.hero-pattern {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(37, 99, 235, 0.06) 1px,
+    transparent 0
+  );
+  background-size: 32px 32px;
+}
+
+/* ---------- Оверлей генерации ---------- */
+.gen-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px;
+  text-align: center;
+}
+
+.gen-spinner {
+  width: 56px;
+  height: 56px;
+  border: 4px solid #E2E8F0;
+  border-top-color: #2563EB;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ---------- Бейдж уведомлений ---------- */
+#notifBadge {
+  transition: all 0.2s;
+}
+
+/* ============================================
+   ТЁМНАЯ ТЕМА
+   ============================================ */
+body.dark {
+  background: #0F172A;
+  color: #F1F5F9;
+}
+
+body.dark .card {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+body.dark .bg-white {
+  background: #1E293B;
+}
+
+body.dark .bg-gray-50 {
+  background: #1E293B;
+}
+
+body.dark .text-gray-500 {
+  color: #94A3B8;
+}
+
+body.dark .text-gray-400 {
+  color: #64748B;
+}
+
+body.dark .border-gray-100 {
+  border-color: #334155;
+}
+
+body.dark .border-gray-200 {
+  border-color: #334155;
+}
+
+body.dark .bg-gray-100 {
+  background: #1E293B;
+}
+
+body.dark .input-field {
+  background: #1E293B;
+  border-color: #334155;
+  color: #F1F5F9;
+}
+
+body.dark .input-field:focus {
+  border-color: #3B82F6;
+}
+
+body.dark .nav-item:hover {
+  background: #1E293B;
+}
+
+body.dark .sidebar {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+body.dark .btn-outline {
+  border-color: #3B82F6;
+  color: #60A5FA;
+}
+
+body.dark .btn-outline:hover {
+  background: #3B82F6;
+  color: white;
+}
+
+body.dark .table-row:hover {
+  background: #1E293B;
+}
+
+body.dark .status-green {
+  background: #064E3B;
+  color: #A7F3D0;
+}
+
+body.dark .status-orange {
+  background: #78350F;
+  color: #FDE68A;
+}
+
+body.dark .status-red {
+  background: #7F1D1D;
+  color: #FECACA;
+}
+
+body.dark .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark .modal-box {
+  background: #1E293B;
+}
+
+body.dark .schedule-cell.type-lecture {
+  background: #1E3A5F;
+}
+
+body.dark .schedule-cell.type-practice {
+  background: #064E3B;
+}
+
+body.dark .schedule-cell.type-lab {
+  background: #78350F;
+}
+
+body.dark .border-gray-100,
+body.dark .dark\:border-gray-700 {
+  border-color: #334155;
+}
+
+body.dark .hover\:bg-gray-100:hover,
+body.dark .dark\:hover\:bg-gray-700:hover {
+  background: #1E293B;
+}
+
+body.dark .bg-white\/80 {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+body.dark .bg-gray-900\/80 {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+body.dark .border-gray-100,
+body.dark .dark\:border-gray-700 {
+  border-color: #334155;
+}
+
+body.dark .bg-orange-50 {
+  background: rgba(120, 53, 15, 0.2);
+}
+
+body.dark .bg-red-50 {
+  background: rgba(127, 29, 29, 0.2);
+}
+
+body.dark .bg-blue-50 {
+  background: rgba(30, 58, 95, 0.5);
+}
+
+body.dark .bg-green-50 {
+  background: rgba(6, 78, 59, 0.2);
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ
+   ============================================ */
+@media (max-width: 1023px) {
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 50;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+  }
+}
